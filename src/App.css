@@ -1,3 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Otomanopee+One&display=swap");
+* {
+  font-family: "Otomanopee One", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 12px;
+  color: #637087;
+}
+
 .App {
   text-align: center;
 }
@@ -35,4 +44,38 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: black;
+}
+
+.head-nav span {
+  color: blue;
+}
+
+.head-nav {
+  border-bottom: 1px solid #ccc;
+}
+
+.landing span {
+  color: #16c784;
+}
+
+.landing p {
+  font-size: 15px;
+}
+
+.navbar-brand {
+  font-size: 25px;
+}
+
+.table-items td {
+  font-size: 13px;
+  color: #282c34;
 }
