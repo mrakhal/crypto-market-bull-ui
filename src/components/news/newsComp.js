@@ -12,43 +12,46 @@ import {
   Button,
   CardBody,
   Pagination,
-  PaginationItem,
   PaginationLink,
+  PaginationItem,
 } from "reactstrap";
 import { connect } from "react-redux";
 
 class NewsComp extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { news: [], pages: 5, topNews: [], topPages: 5 };
+    this.state = {
+      topNews: [],
+      topPages: 5,
+    };
   }
 
   componentDidMount() {
-    this.getNews();
+    // this.getNews();
     this.getTopNews();
   }
 
-  getNews = () => {
-    axios
-      .get(
-        `http://newsapi.org/v2/everything?q=${this.props.location.out.keyword}&apiKey=aa8f50d4640743efbcdb2c6b9641bf23`
-      )
-      .then((res) => {
-        this.setState({ news: res.data.articles.splice(0, this.state.pages) });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // getNews = () => {
+  //   axios
+  //     .get(
+  //       `http://newsapi.org/v2/everything?q=${this.props.location.out.keyword}&apiKey=aa8f50d4640743efbcdb2c6b9641bf23`
+  //     )
+  //     .then((res) => {
+  //       this.setState({ news: res.data.articles.splice(0, this.state.pages) });
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   getTopNews = () => {
     axios
       .get(
-        "http://newsapi.org/v2/top-headlines?q=market&apiKey=aa8f50d4640743efbcdb2c6b9641bf23"
+        "http://newsapi.org/v2/top-headlines?q=money&apiKey=aa8f50d4640743efbcdb2c6b9641bf23"
       )
       .then((res) => {
         this.setState({
-          topNews: res.data.articles.splice(1, this.state.topPages),
+          topNews: res.data.articles.splice(0, this.state.topPages),
         });
       })
       .catch((err) => {
@@ -57,7 +60,8 @@ class NewsComp extends React.Component {
   };
 
   render() {
-    console.log("keyword", this.props.news);
+    console.log("keyword", this.props.location.state);
+    console.log("length", this.props.news.length);
     return (
       <Container fluid className="p-0">
         <Row>
@@ -77,7 +81,7 @@ class NewsComp extends React.Component {
                   <Col md="12" className="pt-3 pb-3">
                     <h5>All News</h5>
                   </Col>
-                  {this.state.news.map((item) => {
+                  {this.props.news.map((item) => {
                     return (
                       <Card style={{ borderRadius: "15px", marginTop: "10px" }}>
                         <CardBody>
@@ -115,6 +119,7 @@ class NewsComp extends React.Component {
                         md="12"
                         className="d-flex align-items-center justify-content-center pt-5"
                       >
+                        {/* Pagination */}
                         <Pagination aria-label="Page navigation example">
                           <PaginationItem>
                             <PaginationLink first href="#" />
@@ -202,7 +207,7 @@ class NewsComp extends React.Component {
 
 const mapToProps = ({ newsReducers }) => {
   return {
-    news: newsReducers,
+    news: newsReducers.news,
   };
 };
 

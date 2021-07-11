@@ -1,6 +1,5 @@
 const INITIAL_STATE = {
   news: [],
-  transaction: [],
 };
 
 export const newsReducers = (state = INITIAL_STATE, action) => {

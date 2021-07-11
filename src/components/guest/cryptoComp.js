@@ -1,7 +1,6 @@
 import React from "react";
 import { Container, Row, Col } from "reactstrap";
 import Slider from "react-slick";
-import axios from "axios";
 import ListRank from "../guest/listRank";
 import { Carousel } from "react-responsive-carousel";
 import Banner1 from "../../assets/images/banner1.gif";
@@ -61,7 +60,7 @@ var settings = {
   ],
 };
 
-class landingComp extends React.Component {
+class cryptoComp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -78,13 +77,13 @@ class landingComp extends React.Component {
           <Col md="12">
             <Carousel autoplay showThumbs={false} infiniteLoop={true}>
               <div>
-                <img src={Banner1} />
+                <img src={Banner1} alt="first banner" />
               </div>
               <div>
-                <img src={Banner3} />
+                <img src={Banner3} alt="second banner" />
               </div>
               <div>
-                <img src={Banner2} />
+                <img src={Banner2} alt="third banner" />
               </div>
             </Carousel>
           </Col>
@@ -119,6 +118,7 @@ class landingComp extends React.Component {
                                   src="https://s3.amazonaws.com/s2.coinmarketcap.com/static/alerts/60a4fb4abee9a40019d0c6e4/1621424989453_Price%20Prediction%20Graphic%20128x128.jpg"
                                   width="100%"
                                   style={{ borderRadius: "15px" }}
+                                  alt="picture slider"
                                 />
                               </Col>
                               <Col md="8">
@@ -155,6 +155,7 @@ class landingComp extends React.Component {
                                   src="https://s3.amazonaws.com/s2.coinmarketcap.com/static/alerts/60b77fe86675c10012e22956/1625489071765_marketmusings2.jpg"
                                   width="100%"
                                   style={{ borderRadius: "15px" }}
+                                  alt="picture slider 2"
                                 />
                               </Col>
                               <Col md="8">
@@ -191,6 +192,7 @@ class landingComp extends React.Component {
                                   src="https://s3.amazonaws.com/s2.coinmarketcap.com/static/alerts/60deae5804a23f0019d40c67/1625206372104_128x128%20updated%20(2).png"
                                   width="100%"
                                   style={{ borderRadius: "15px" }}
+                                  alt="picture slider 3"
                                 />
                               </Col>
                               <Col md="8">
@@ -227,6 +229,7 @@ class landingComp extends React.Component {
                                   src="https://s3.amazonaws.com/s2.coinmarketcap.com/static/alerts/60dbeb30e25a5200121f3755/1625025339139_128x128 (2).png"
                                   width="100%"
                                   style={{ borderRadius: "15px" }}
+                                  alt="picture slider 4"
                                 />
                               </Col>
                               <Col md="8">
@@ -258,4 +261,4 @@ class landingComp extends React.Component {
   }
 }
 
-export default landingComp;
+export default cryptoComp;

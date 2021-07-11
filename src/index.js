@@ -7,10 +7,11 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { Reducers } from "./redux/reducers";
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import ReduxThunk from "redux-thunk";
 
-const globalStore = createStore(Reducers);
+const globalStore = createStore(Reducers, {}, applyMiddleware(ReduxThunk));
 ReactDOM.render(
   <Provider store={globalStore}>
     <BrowserRouter>

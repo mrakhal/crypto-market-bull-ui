@@ -8,7 +8,7 @@ export const getNews = (keyword, page) => {
       );
       dispatch({
         type: "GET_NEWS",
-        payload: res.data.splice(0, page),
+        payload: res.data.articles.splice(0, page),
       });
       // return res.data
     } catch (error) {

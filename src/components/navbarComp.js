@@ -16,27 +16,24 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "reactstrap";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { getNews } from "../redux/actions";
 import { connect } from "react-redux";
 
 class NavbarComp extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isOpen: false };
-  }
-
-  componentDidMount() {
-    // this.props.getNews();
+    this.state = { isOpen: false, index: 0, currentPage: 1, todosPerPage: 5 };
   }
 
   render() {
+    console.log(this.props.news);
     return (
       <div>
         <Container fluid className="p-0 head-nav ">
-          <Row className="p-2">
+          <Row className="p-2 info-coin">
             {/* Top Of Navbar */}
-            <Col md="9">
+            <Col md="9" className="d-none d-xl-block">
               <Container>
                 <Row>
                   <Col md="2">
@@ -73,7 +70,7 @@ class NavbarComp extends React.Component {
           light
           expand="md"
           className="p-3"
-          style={{ borderBottom: "0.1px solid #ccc" }}
+          style={{ boxShadow: "2px 2px 2px 1px rgba(0, 0, 0, 1)" }}
         >
           <NavbarBrand href="/">
             <strong className="navbar-brand">CoinMarketBull</strong>
@@ -86,7 +83,22 @@ class NavbarComp extends React.Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="m-auto" navbar>
               <NavItem>
-                <NavLink href="#">Market</NavLink>
+                <Link
+                  style={{ textDecoration: "none", color: "#637087" }}
+                  to={{
+                    pathname: "/crypto",
+                    // state: this.state.todosPerPage,
+                    // out: { keyword: "cryptocurrencies" },
+                  }}
+                  // params={{ pages: this.state.todosPerPage }}
+                >
+                  <NavLink>
+                    <a>Crypto</a>
+                  </NavLink>
+                </Link>
+              </NavItem>
+              <NavItem>
+                <NavLink>Market</NavLink>
               </NavItem>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
@@ -94,7 +106,12 @@ class NavbarComp extends React.Component {
                     style={{ textDecoration: "none", color: "#637087" }}
                     to={{
                       pathname: "/news",
-                      out: { keyword: "cryptocurrencies" },
+                      // state: this.state.todosPerPage,
+                      // out: { keyword: "cryptocurrencies" },
+                    }}
+                    // params={{ pages: this.state.todosPerPage }}
+                    onClick={() => {
+                      this.props.getNews("stock", this.state.todosPerPage);
                     }}
                   >
                     News
@@ -105,7 +122,10 @@ class NavbarComp extends React.Component {
                     style={{ textDecoration: "none", color: "#637087" }}
                     to={{
                       pathname: "/news",
-                      out: { keyword: "Bitcoin" },
+                      // out: { pages: this.state.todosPerPage },
+                    }}
+                    onClick={() => {
+                      this.props.getNews("bitcoin", this.state.todosPerPage);
                     }}
                   >
                     <DropdownItem>Bitcoin</DropdownItem>
@@ -115,13 +135,27 @@ class NavbarComp extends React.Component {
                     style={{ textDecoration: "none", color: "#637087" }}
                     to={{
                       pathname: "/news",
-                      out: { keyword: "Ethereum" },
+                      // out: { pages: this.state.todosPerPage },
+                    }}
+                    onClick={() => {
+                      this.props.getNews("Ethereum", this.state.todosPerPage);
                     }}
                   >
                     <DropdownItem>Ethereum</DropdownItem>
                   </Link>
                   <DropdownItem divider />
-                  <DropdownItem>Cardano</DropdownItem>
+                  <Link
+                    style={{ textDecoration: "none", color: "#637087" }}
+                    to={{
+                      pathname: "/news",
+                      // out: { pages: this.state.todosPerPage },
+                    }}
+                    onClick={() => {
+                      this.props.getNews("cardano", this.state.todosPerPage);
+                    }}
+                  >
+                    <DropdownItem>Cardano</DropdownItem>
+                  </Link>
                 </DropdownMenu>
               </UncontrolledDropdown>
             </Nav>
@@ -160,4 +194,10 @@ class NavbarComp extends React.Component {
   }
 }
 
-export default connect(null, { getNews })(NavbarComp);
+const mapToProps = ({ newsReducers }) => {
+  return {
+    news: newsReducers,
+  };
+};
+
+export default connect(mapToProps, { getNews })(NavbarComp);
